@@ -5,7 +5,9 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 # from pathlib import Path
 # import os
+import cv2
 
+from fastapi.responses import StreamingResponse
 from camera_service import video_webcam
 from inference_service import inference
 
@@ -21,17 +23,28 @@ def read_root():
 def read_item(item_id: int, q: Union[str, None] = None):
     return {"item_id": item_id, "q": q}
 
+
 @app.get("/camera")
 def capture_image():
     # os.system('python camera_service.py')
     # image_path = Path("C:/Users/sersatr/Repositorios/vision-yolo-system/dataset/capturas/result.jpg")
  
     img = video_webcam()
-    # img_path = Path(img)
-    if not img.is_file():
-        return {"error": "Image not found on the server"}
-    return FileResponse(img)
+#    # img_path = Path(img)
+#    if not img.is_file():
+#        return {"error": "Image not found on the server"}
+#    return FileResponse(img)
 
+    _, buffer = cv2.imencode('.jpg', img)
+    if not _:
+        continue
+    img_data = buffer.tobytes()
+    yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + img_data + b'\r\n')
+    return StreamingResponse(
+            motor_de_streaming(), 
+            media_type="multipart/x-mixed-replace; boundary=frame"
+        )
+ 
 
 @app.get("/inference")
 def run_inference():   
@@ -44,4 +57,10 @@ def run_inference():
     if not resultado.is_file():
         return {"error": "Image not found on the server"}
     return FileResponse(resultado)
+
+
+
+
+
+
 
