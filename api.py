@@ -3,8 +3,11 @@
 from typing import Union
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
-from pathlib import Path
-import os
+# from pathlib import Path
+# import os
+
+from camera_service import webcam
+from inference_service import inference
 
 app = FastAPI()
 
@@ -20,18 +23,25 @@ def read_item(item_id: int, q: Union[str, None] = None):
 
 @app.get("/camera")
 def capture_image():
-    os.system('python camera-service.py')
-    image_path = Path("C:/Users/sersatr/Repositorios/vision-yolo-system/dataset/capturas/result.jpg")
-    if not image_path.is_file():
+    # os.system('python camera_service.py')
+    # image_path = Path("C:/Users/sersatr/Repositorios/vision-yolo-system/dataset/capturas/result.jpg")
+ 
+    img = webcam()
+    # img_path = Path(img)
+    if not img.is_file():
         return {"error": "Image not found on the server"}
-    return FileResponse(image_path)
+    return FileResponse(img)
 
 
 @app.get("/inference")
 def run_inference():   
-    os.system('python inference-service.py')
-    image_path = Path("C:/Users/sersatr/Repositorios/vision-yolo-system/runs/detect/predict8/result.jpg")
-    if not image_path.is_file():
+    # os.system('python inference-service
+    # image_path = Path("C:/Users/sersatr/Repositorios/vision-yolo-system/runs/detect/predict8/result.jpg")
+    # imagencita = capture_image()
+    # image_path1 = Path(imagencita)
+    resultado = inference()
+
+    if not resultado.is_file():
         return {"error": "Image not found on the server"}
-    return FileResponse(image_path)
+    return FileResponse(resultado)
 
