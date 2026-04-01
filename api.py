@@ -6,7 +6,7 @@ from fastapi.responses import FileResponse
 # from pathlib import Path
 # import os
 
-from camera_service import webcam
+from camera_service import video_webcam
 from inference_service import inference
 
 app = FastAPI()
@@ -26,7 +26,7 @@ def capture_image():
     # os.system('python camera_service.py')
     # image_path = Path("C:/Users/sersatr/Repositorios/vision-yolo-system/dataset/capturas/result.jpg")
  
-    img = webcam()
+    img = video_webcam()
     # img_path = Path(img)
     if not img.is_file():
         return {"error": "Image not found on the server"}

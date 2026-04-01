@@ -49,3 +49,14 @@ def show_webcam():
 
     finally:
         cap.release()
+
+
+def video_webcam():
+    cap = cv2.VideoCapture(0)  # Open the default camera
+    ret, frame = cap.read()
+
+    # Resize to speed up processing
+    frame_resized = cv2.resize(frame, (640, 480))
+    cv2.imwrite(str(IMAGE_PATH), frame_resized)
+    
+    return IMAGE_PATH
