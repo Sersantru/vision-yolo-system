@@ -31,8 +31,8 @@ def capture_image():
  
     img = video_webcam()
     # img_path = Path(img)
-    if not img.is_file():
-        return {"error": "Image not found on the server"}
+    if img is None or not img.is_file():
+        return {"error": "No se pudo conectar con la cámara IP o guardar la imagen"}
     return FileResponse(img)
 
     '''

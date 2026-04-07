@@ -65,7 +65,7 @@ def video_webcam():
 
     IMG_PATH.parent.mkdir(parents=True, exist_ok=True)
 
-    url_camera="http://pendelcam.kip.uni-heidelberg.de/mjpg/video.mjpg"
+    url_camera="http://200.46.196.243:80/mjpg/video.mjpg"
 
     cap = cv2.VideoCapture(url_camera)  # Open the default camera "0", si no pues metemos la url
     ret, frame = cap.read()
