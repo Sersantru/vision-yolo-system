@@ -30,11 +30,12 @@ def capture_image():
     # image_path = Path("C:/Users/sersatr/Repositorios/vision-yolo-system/dataset/capturas/result.jpg")
  
     img = video_webcam()
-#    # img_path = Path(img)
-#    if not img.is_file():
-#        return {"error": "Image not found on the server"}
-#    return FileResponse(img)
+    # img_path = Path(img)
+    if not img.is_file():
+        return {"error": "Image not found on the server"}
+    return FileResponse(img)
 
+    '''
     _, buffer = cv2.imencode('.jpg', img)
     if not _:
         continue
@@ -44,6 +45,7 @@ def capture_image():
             motor_de_streaming(), 
             media_type="multipart/x-mixed-replace; boundary=frame"
         )
+        '''
  
 
 @app.get("/inference")
