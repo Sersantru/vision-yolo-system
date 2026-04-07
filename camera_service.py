@@ -15,6 +15,8 @@ def webcam():
     # Resize to speed up processing
     frame_resized = cv2.resize(frame, (640, 480))
     cv2.imwrite(str(IMG_PATH), frame_resized)
+
+    cap.release()
     
     return IMG_PATH
 
@@ -61,4 +63,6 @@ def video_webcam():
     frame_resized = cv2.resize(frame, (640, 480))
     cv2.imwrite(str(IMG_PATH), frame_resized)
     
+    cap.release()
+
     return IMG_PATH

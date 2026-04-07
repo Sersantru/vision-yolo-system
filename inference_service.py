@@ -11,6 +11,8 @@ IMG_PATH = BASE_DIR / "dataset" / "capturas" / "result.jpg"
 modelo_entrenado = YOLO(MODEL_PATH)
 
 def inference():
+    
+    RESULT_PATH.parent.mkdir(parents=True, exist_ok=True)
 
     resultados = modelo_entrenado.predict(IMG_PATH)
     inferencia = resultados[0].plot()
