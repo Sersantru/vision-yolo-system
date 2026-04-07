@@ -1,0 +1,5 @@
+__pycache__/
+runs/
+dataset/capturas/
+dataset/inferencias/
+camera_service.ipynb
