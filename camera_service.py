@@ -8,7 +8,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 IMG_PATH = BASE_DIR / "dataset" / "capturas" / "result.jpg"
 
+'''
+
 def webcam():
+
+    IMG_PATH.parent.mkdir(parents=True, exist_ok=True)
+
     cap = cv2.VideoCapture(0)  # Open the default camera
     ret, frame = cap.read()
 
@@ -54,11 +59,20 @@ def show_webcam():
     finally:
         cap.release()
 
+'''
 
 def video_webcam():
-    cap = cv2.VideoCapture(0)  # Open the default camera
+
+    IMG_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    url_camera="http://pendelcam.kip.uni-heidelberg.de/mjpg/video.mjpg"
+
+    cap = cv2.VideoCapture(url_camera)  # Open the default camera "0", si no pues metemos la url
     ret, frame = cap.read()
 
+    if not ret:
+        cap.release()
+        return None
     # Resize to speed up processing
     frame_resized = cv2.resize(frame, (640, 480))
     cv2.imwrite(str(IMG_PATH), frame_resized)

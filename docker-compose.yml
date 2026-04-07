@@ -8,6 +8,10 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
-    devices:
-      - /dev/video0:/dev/video0
+    
+#    devices:
+#      - /dev/video0:/dev/video0
+#      - /dev/video1:/dev/video1
+#    privileged: true
+    
     restart: unless-stopped
